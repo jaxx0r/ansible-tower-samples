@@ -1,0 +1,13 @@
+- name: Sample to display the executing user
+  hosts: all
+  tasks:
+    - name: Who am I?
+      shell: id
+      register: idoutput
+    - name: Display output
+      debug:
+        var: idoutput.stdout
+    - name: Write to file
+      copy:
+        content: "{{ idoutput.stdout }}"
+        dest: /tmp/test
